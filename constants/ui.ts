@@ -5,7 +5,8 @@ const COLORS = {
     PRIMARY_ACTIVE_BUTTON: "#0066ffff",
     PRIMARY_RED: "#d60101ff",
     SUCCES: "#00da12ff",
-    BORDER: "#ffffffff"
+    PRIMARY_BORDER: "#ffffffff",
+    PLACEHOLDER: "#ffffff9a"
 
 }
 

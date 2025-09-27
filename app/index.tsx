@@ -1,5 +1,6 @@
 import COLORS from "@/constants/ui";
 import Header from "@/layout/Header";
+import TodoCreator from "@/layout/TodoCreater";
 import TodoList from "@/layout/ToDoList";
 import { Todo } from "@/types/todo";
 import { useState } from "react";
@@ -26,6 +27,10 @@ const defaultTodos: Todo[] = [
 export default function Index() {
   const [todos, setTodos] = useState<Todo[]>(defaultTodos);
 
+  const addTodo = (title: Todo["title"]) => {
+    setTodos([...todos, { id: todos.length + 1, title, isCompleted: false }]);
+  };
+
   const completedTodos = todos.filter((todos) => todos.isCompleted);
 
   return (
@@ -35,7 +40,8 @@ export default function Index() {
         totalTodos={todos.length}
         completedTodos={completedTodos.length}
       />
-      <TodoList todos={defaultTodos} />
+      <TodoCreator onAddTodo={addTodo} />
+      <TodoList todos={todos} />
     </View>
   );
 }

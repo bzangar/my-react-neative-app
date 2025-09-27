@@ -20,6 +20,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({
   icon,
   size = "default",
   variant = "default",
+  disabled,
   ...props
 }) => {
   return (
@@ -30,6 +31,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({
         variant === "delete" ? styles.delete : null,
       ]}
       {...props}
+      disabled={disabled}
     >
       {label && <StyledText>{label}</StyledText>}
       {icon && <AntDesign name={icon} size={20} color={COLORS.PRIMARY_TEXT} />}
