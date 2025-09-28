@@ -23,17 +23,23 @@ const StyledButton: React.FC<StyledButtonProps> = ({
   disabled,
   ...props
 }) => {
+  const textVariant = (() => {
+    if (size === "large") return "header";
+    return "small";
+  })();
   return (
     <TouchableOpacity
       style={[
         styles.base,
+        disabled ? styles.disabled : null,
         size === "small" ? styles.small : null,
+        size === "large" ? styles.large : null,
         variant === "delete" ? styles.delete : null,
       ]}
       {...props}
       disabled={disabled}
     >
-      {label && <StyledText>{label}</StyledText>}
+      {label && <StyledText variant={textVariant}>{label}</StyledText>}
       {icon && <AntDesign name={icon} size={20} color={COLORS.PRIMARY_TEXT} />}
     </TouchableOpacity>
   );
@@ -50,9 +56,17 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
 
+  disabled: {
+    opacity: 0.5,
+  },
+
   small: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+  },
+
+  large: {
+    paddingHorizontal: 30,
   },
 
   delete: {

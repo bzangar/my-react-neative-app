@@ -2,24 +2,41 @@ import StyledButton from "@/components/StyledButton";
 import StyledCheckBox from "@/components/StyledCheckBox";
 import StyledText from "@/components/StyledText";
 import COLORS from "@/constants/ui";
+import { Todo } from "@/types/todo";
 import { StyleSheet, View } from "react-native";
 
-type TodoItemProps = {
-  title: string;
-  iscompleted: boolean;
+type TodoItemProps = Todo & {
+  onCheck: (id: Todo["id"]) => void;
+  onDelete: (id: Todo["id"]) => void;
+  onUpdateTitle: (id: Todo["id"], title: Todo["title"]) => void;
 };
 
-const TodoItem: React.FC<TodoItemProps> = ({ title, iscompleted }) => {
+const TodoItem: React.FC<TodoItemProps> = ({
+  id,
+  title,
+  isCompleted,
+  onCheck,
+  onDelete,
+  onUpdateTitle,
+}) => {
+  const onPressCheck = () => {
+    onCheck(id);
+  };
+
+  const onPressDelete = () => {
+    onDelete(id);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.checkTitleContainer}>
         <StyledCheckBox
-          checked={iscompleted}
-          onCheck={() => {}}
+          checked={isCompleted}
+          onCheck={onPressCheck}
         ></StyledCheckBox>
         <StyledText
           style={[
-            { textDecorationLine: iscompleted ? "line-through" : "none" },
+            { textDecorationLine: isCompleted ? "line-through" : "none" },
           ]}
         >
           {" "}
@@ -28,7 +45,12 @@ const TodoItem: React.FC<TodoItemProps> = ({ title, iscompleted }) => {
       </View>
       <View style={styles.controlsContainer}>
         <StyledButton icon="edit" size="small" />
-        <StyledButton icon="delete" size="small" variant="delete" />
+        <StyledButton
+          icon="delete"
+          size="small"
+          variant="delete"
+          onPress={onPressDelete}
+        />
       </View>
     </View>
   );
