@@ -1,3 +1,4 @@
+import StyledButton from "@/components/StyledButton";
 import StyledText from "@/components/StyledText";
 import { getFullFormattedDate } from "@/helpers/date";
 import { StyleSheet, View } from "react-native";
@@ -12,6 +13,9 @@ const Header: React.FC<HeaderProps> = ({ completedTodos, totalTodos }) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.sun}>
+        <StyledButton icon="sun" />
+      </View>
       <View style={styles.headerMainContent}>
         <StyledText variant="title">Todo App</StyledText>
         <StyledText variant="subTitle">{dateNOW}</StyledText>
@@ -34,6 +38,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 5,
+  },
+  sun: {
+    justifyContent: "flex-end",
+    flexDirection: "row",
   },
 });
 
