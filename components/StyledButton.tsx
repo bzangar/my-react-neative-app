@@ -12,7 +12,7 @@ type StyledButtonProps = TouchableOpacityProps & {
   label?: string;
   icon?: React.ComponentProps<typeof AntDesign>["name"];
   size?: "default" | "large" | "small";
-  variant?: "default" | "delete";
+  variant?: "default" | "secondary" | "delete";
 };
 
 const StyledButton: React.FC<StyledButtonProps> = ({
@@ -34,6 +34,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({
         disabled ? styles.disabled : null,
         size === "small" ? styles.small : null,
         size === "large" ? styles.large : null,
+        variant === "secondary" ? styles.secondary : null,
         variant === "delete" ? styles.delete : null,
       ]}
       {...props}
@@ -69,6 +70,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 
+  secondary: {
+    backgroundColor: COLORS.SECONDARY_BACKGROUND,
+    borderColor: COLORS.PRIMARY_ACTIVE_BUTTON,
+    borderWidth: 1.5,
+  },
   delete: {
     backgroundColor: COLORS.PRIMARY_RED,
   },
